@@ -2,40 +2,51 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MotivoContato;
 use Illuminate\Http\Request;
 use App\Models\SiteContato;
 
 class ContatoController extends Controller
 {
-    public function contato(Request $request) {
+    public function contato(Request $request)
+    {
 
-//        $contato = new SiteContato();
-//        $contato->nome = $request->input('nome');
-//        $contato->telefone = $request->input('telefone');
-//        $contato->email = $request->input('email');
-//        $contato->motivo_contato = $request->input('motivo_contato');
-//        $contato->mensagem = $request->input('mensagem');
-//        $contato->save();
+        $motivo_contatos = MotivoContato::all();
 
-//        $contato = new SiteContato();
-//        $contato->create($request->all());
-
-        return view('site.contato');
+        return view('site.contato', ['motivo_contatos' => $motivo_contatos]);
 
     }
 
-    public function salvar(Request $request) {
-
-        // realizar validação do formulário
-        $request->validate([
-            'nome' => 'required',
+    public function salvar(Request $request)
+    {
+        $regras = [
+            'nome' => 'required|min:3|max:40|unique:site_contatos',
             'telefone' => 'required',
-            'email' => 'required',
-            'motivo_contato' => 'required',
-            'mensagem' => 'required'
+            'email' => 'required:email',
+            'motivo_contatos_id' => 'required',
+            'mensagem' => 'required|max:2000'
+        ];
 
-        ]);
+        $feedback = [
+            'nome.required' => 'Campo nome é obrigatório',
+            'nome.min' => 'Nome precisa ter no mínimo 3 caracteres',
+            'nome.max' => 'Nome deve ter no máximo 40 caracteres',
+            'nome.unique' => 'Nome já existente',
+            'telefone.required' => 'Campo telefone é obrigatório',
+            'email.required' => 'Campo email é obrigatório',
+            'email.email' => 'E-mail inválido',
+            'motivo_contatos_id.required' => 'Campo motivo do contato é obrigatório',
+            'mensagem.required' => 'Campo mensagem é obrigatório',
+            'mensagem.max' => 'Mensagem deve ter no máximo 2000 caracteres'
 
-        //SiteContato::create($request->all());
+            // 'required' => 'O campo :attributes é obrigatório'
+            // Forma universal de utilizar para todos required
+        ];
+
+        $request->validate($regras, $feedback);
+
+        SiteContato::create($request->all());
+
+        return redirect()->route('site.index');
     }
 }
