@@ -27,9 +27,8 @@
     @if($errors->has('motivo_contatos_id'))
         <div class="alert alert-danger" role="alert">{{ $errors->first('motivo_contatos_id') }}</div>
     @endif
-    <textarea name="mensagem" value="{{ old('mensagem') }}"
-              class="{{ $classe }} {{ $errors->has('mensagem') ? 'form-control is-invalid' : '' }}"
-              placeholder="Preencha aqui a sua mensagem"></textarea>
+    <textarea name="mensagem" class="{{ $classe }} {{ $errors->has('mensagem') ? 'form-control is-invalid' : '' }}"
+              placeholder="Preencha aqui a sua mensagem">{{ old('mensagem') }}</textarea>
     @if($errors->has('mensagem'))
         <div class="alert alert-danger" role="alert">{{ $errors->first('mensagem') }}</div>
     @endif
