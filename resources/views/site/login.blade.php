@@ -3,22 +3,22 @@
 @section('titulo', 'Home')
 
 @section('conteudo')
-
     <div class="conteudo-pagina">
         <div class="titulo-pagina">
             <h1>Login</h1>
         </div>
-
         <div class="informacao-pagina">
             <form action="{{ route('site.login') }}" method="post">
                 <div class="form-login">
                     @csrf
                     <input name="email" value="{{ old('email') }}" type="text" placeholder="E-mail" class="borda-preta {{ $errors->has('email') ? 'form-control is-invalid' : '' }}">
                     @if($errors->has('email'))
+                        {{ $erro = '' }}
                         <div class="alert alert-danger" role="alert">{{ $errors->first('email') }}</div>
                     @endif
                     <input name="password" value="{{ old('password') }}" type="password" placeholder="Senha" class="borda-preta {{ $errors->has('password') ? 'form-control is-invalid' : '' }}">
                     @if($errors->has('password'))
+                        {{ $erro = '' }}
                         <div class="alert alert-danger" role="alert">{{ $errors->first('password') }}</div>
                     @endif
                     <button type="submit" class="borda-preta">Acessar</button>
@@ -30,7 +30,6 @@
 
         </div>
     </div>
-
     <div class="rodape">
         <div class="redes-sociais">
             <h2>Redes sociais</h2>

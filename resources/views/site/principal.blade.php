@@ -3,7 +3,6 @@
 @section('titulo', 'Home')
 
 @section('conteudo')
-
     <div class="conteudo-destaque">
 
         <div class="esquerda">
@@ -25,7 +24,6 @@
                 <img src="{{ asset('img/player_video.jpg') }}">
             </div>
         </div>
-
         <div class="direita">
             <div class="contato">
                 <h1>Contato</h1>

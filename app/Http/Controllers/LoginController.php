@@ -8,6 +8,11 @@ use App\Models\User;
 class LoginController extends Controller
 {
     public function index(Request $request) {
+        session_start();
+
+        if (isset($_SESSION['email']) && $_SESSION['email'] != '') {
+            return redirect()->route('app.home');
+        }
 
         $erro = '';
 
@@ -56,13 +61,13 @@ class LoginController extends Controller
 
             return redirect()->route('app.home');
         } else {
-            return redirect()->route('site.login', ['erro' => 1]);
+            return redirect()->route('site.login', ['erro' => 1])->withInput();
         }
     }
 
     public function sair() {
         session_destroy();
 
-        return redirect()->route('site.index');
+        return redirect()->route('site.login');
     }
 }
