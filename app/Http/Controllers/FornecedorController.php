@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Fornecedor;
 use Illuminate\Http\Request;
 
 class FornecedorController extends Controller
@@ -17,17 +18,19 @@ class FornecedorController extends Controller
 
     public function adicionar(Request $request)
     {
-        if ($request->input('_token') != '') {
+        if ($request->input('_token') != '' ) {
             // validação
             $regras = [
-                'nome' => 'required|min:3|max:40',
-                'site' => 'required',
+                'nome' => 'required|min:3|max:40|unique:fornecedores',
+                'site' => 'required|unique:fornecedores',
                 'uf' => 'required|min:2|max:2',
-                'email' => 'required|email'
+                'email' => 'required|email|unique:fornecedores'
             ];
 
             $feedback = [
-                'required' => 'Campo obrigatório',
+                'required' => ':Attribute obrigatório',
+                'uf.required' => 'UF obrigatório',
+                'unique' => ':Attribute já existente',
                 'nome.min' => 'O campo nome deve ter no mínimo 3 caracteres',
                 'nome.max' => 'O campo nome deve ter no máximo 40 caracteres',
                 'uf.min' => 'O campo uf só pode ter 2 caracteres',
@@ -37,7 +40,10 @@ class FornecedorController extends Controller
 
             $request->validate($regras, $feedback);
 
-            echo 'Chegamos até aqui';
+            $fornecedor = new Fornecedor();
+            $fornecedor->create($request->only(['nome', 'site', 'uf' , 'email']));
+
+            return view('app.fornecedor.adicionar', ['success' => 'true']);
         }
 
         return view('app.fornecedor.adicionar');

@@ -12,11 +12,26 @@
             <div class="width-30-mlr">
                 <form action="{{ route('app.fornecedor.adicionar') }}" method="post">
                     @csrf
-                    <input type="text" name="nome" placeholder="Nome" class="borda-preta">
-                    <input type="text" name="site" placeholder="Site" class="borda-preta">
-                    <input type="text" name="uf" placeholder="UF" class="borda-preta">
-                    <input type="text" name="email" placeholder="E-mail" class="borda-preta">
-                    <button type="submit" class="borda-preta">Listar</button>
+                    <input type="text" name="nome" value="{{ old('nome') }}" placeholder="Nome" class="borda-preta">
+                    @if($errors->has('nome'))
+                        <div class="alert alert-danger" role="alert">{{ $errors->first('nome') }}</div>
+                    @endif
+                    <input type="text" name="site" value="{{ old('site') }}" placeholder="Site" class="borda-preta">
+                    @if($errors->has('site'))
+                        <div class="alert alert-danger" role="alert">{{ $errors->first('site') }}</div>
+                    @endif
+                    <input type="text" name="uf"value="{{ old('uf') }}"  placeholder="UF" class="borda-preta">
+                    @if($errors->has('uf'))
+                        <div class="alert alert-danger" role="alert">{{ $errors->first('uf') }}</div>
+                    @endif
+                    <input type="text" name="email"value="{{ old('email') }}"  placeholder="Email" class="borda-preta">
+                    @if($errors->has('email'))
+                        <div class="alert alert-danger" role="alert">{{ $errors->first('email') }}</div>
+                    @endif
+                    <button type="submit" class="borda-preta">Adicionar</button>
+                    @isset($success)
+                        <div class="alert alert-success mt-2" role="alert">Fornecedor adicionado</div>
+                    @endisset
                 </form>
             </div>
         </div>

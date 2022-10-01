@@ -1,5 +1,5 @@
 {{ $slot }}
-<form action="{{ route('site.contato') }}" method="post">
+<form action="{{ route('site.contato') }}" method="post" class="{{ isset($classe_contato) ? $classe_contato : '' }}">
     @csrf
     <input name="nome" value="{{ old('nome') }}" type="text" placeholder="Nome"
            class="{{ $classe }} {{ $errors->has('nome') ? 'form-control is-invalid' : '' }}">
