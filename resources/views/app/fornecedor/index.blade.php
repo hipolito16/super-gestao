@@ -9,7 +9,7 @@
         </div>
         @include('app.fornecedor._partials.menu')
         <div class="informacao-pagina">
-            <div class="width-30-mlr">
+            <div class="width30center">
                 <form action="{{ route('app.fornecedor.listar') }}" method="post">
                     @csrf
                     <input type="text" name="nome" placeholder="Nome" class="borda-preta">

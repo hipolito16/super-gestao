@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="{{ asset('css/bootstrap5.2.1.css') }}">
     <link rel="stylesheet" href="{{ asset('css/estilo_basico.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/icofont.min.css') }}">
 </head>
 <body>
 @include('app.layouts._partials.topo')

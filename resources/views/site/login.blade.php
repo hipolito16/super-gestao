@@ -9,7 +9,7 @@
         </div>
         <div class="informacao-pagina">
             <form action="{{ route('site.login') }}" method="post">
-                <div class="width-30-mlr">
+                <div class="width30center">
                     @csrf
                     <input name="email" value="{{ old('email') }}" type="text" placeholder="E-mail" class="borda-preta {{ $errors->has('email') ? 'form-control is-invalid' : '' }}">
                     @if($errors->has('email'))
