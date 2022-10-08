@@ -218,21 +218,7 @@ button:hover {
     margin-right: auto;
 }
 
-/*ARRUMAR*/
-
-/*.list-paginate {*/
-/*    width: 3px;*/
-/*    height: 3px;*/
-/*    margin-left: auto;*/
-/*    margin-right: auto;*/
-/*}*/
-
-/*.list-paginate li {*/
-/*    display: inline;*/
-/*    margin-left: 5px;*/
-/*    margin-right: 5px;*/
-/*}*/
-
-/*.list-paginate ul {*/
-/*    list-style-type: none;*/
-/*}*/
+/* Forma de corrigir o paginate que estava bugando junto com bootstrap */
+div .hidden {
+    display: none;
+}

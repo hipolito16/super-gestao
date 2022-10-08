@@ -5,7 +5,7 @@
 @section('conteudo')
     <div class="conteudo-pagina">
         <div class="titulo-pagina-2">
-            <p>Fornecedor - Adicionar</p>
+            <p>Fornecedor{{ $titulo ?? '' }}</p>
         </div>
         @include('app.fornecedor._partials.menu')
         <div class="informacao-pagina">

@@ -9,7 +9,7 @@ class FornecedorController extends Controller
 {
     public function index()
     {
-        return view('app.fornecedor.index');
+        return view('app.fornecedor.index', ['titulo' => ' - Consulta']);
     }
 
     public function listar(Request $request)
@@ -20,7 +20,7 @@ class FornecedorController extends Controller
             ->where('email', 'like', '%' . $request->input('email') . '%')
             ->paginate(10);
 
-        return view('app.fornecedor.listar', ['fornecedores' => $fornecedores]);
+        return view('app.fornecedor.listar', ['fornecedores' => $fornecedores,'request' => $request->all(), 'titulo' => ' - Listar']);
     }
 
     public function adicionar(Request $request, $msg = null)
@@ -52,6 +52,8 @@ class FornecedorController extends Controller
             $fornecedor->create($request->only(['nome', 'site', 'uf', 'email']));
 
             $msg = 'Fornecedor adicionado';
+
+            return view('app.fornecedor.adicionar', ['msg' => $msg, 'titulo' => ' - Adicionar']);
         }
 
         // edição
@@ -60,23 +62,23 @@ class FornecedorController extends Controller
             $update = $fornecedor->update($request->only(['nome', 'site', 'uf', 'email']));
             $msg = 'Fornecedor editado';
 
-            return redirect()->route('app.fornecedor.editar', ['id' => $request->input('id'), 'msg' => $msg]);
+            return redirect()->route('app.fornecedor.editar', ['id' => $request->input('id'), 'msg' => $msg, 'titulo' => ' - Editar']);
         };
 
-        return view('app.fornecedor.adicionar', ['msg' => $msg]);
+        return view('app.fornecedor.adicionar', ['msg' => $msg, 'titulo' => ' - Adicionar']);
     }
 
     public function editar($id, $msg = null)
     {
         $fornecedor = Fornecedor::find($id);
 
-        return view('app.fornecedor.adicionar', ['fornecedor' => $fornecedor, 'msg' => $msg]);
+        return view('app.fornecedor.adicionar', ['fornecedor' => $fornecedor, 'msg' => $msg, 'titulo' => ' - Editar']);
     }
 
     public function excluir($id)
     {
-        $fornecedor = Fornecedor::des($id);
+        Fornecedor::find($id)->forceDelete();
 
-        return view('app.fornecedor.adicionar', ['fornecedor' => $fornecedor]);
+        return redirect()->route('app.fornecedor');
     }
 }
