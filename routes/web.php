@@ -25,6 +25,9 @@ Route::middleware(['log.acesso', 'autenticacao'])->prefix('/app')->group(functio
 
     // produtos
     Route::resource('produto', 'App\Http\Controllers\ProdutoController');
+
+    // produtos detalhes
+    Route::resource('produto-detalhe', 'App\Http\Controllers\ProdutoDetalheController');
 });
 
 Route::fallback(function() {

@@ -27,10 +27,8 @@
                             <td>{{ $fornecedor->site }}</td>
                             <td>{{ $fornecedor->uf }}</td>
                             <td>{{ $fornecedor->email }}</td>
-                            <td align="right"><a href="{{ route('app.fornecedor.editar' , $fornecedor->id) }}"><i
-                                        class="icofont-ui-edit"></i></a></td>
-                            <td align="left"><a href="{{ route('app.fornecedor.excluir', $fornecedor->id) }}"><i
-                                        class="icofont-ui-delete"></i></a></td>
+                            <td align="right"><a class="icofont-ui-edit text-decoration-none" href="{{ route('app.fornecedor.editar' , $fornecedor->id) }}"></a></td>
+                            <td align="left"><a class="icofont-ui-delete text-decoration-none" href="{{ route('app.fornecedor.excluir', $fornecedor->id) }}"></a></td>
                         </tr>
                     @endforeach
                     </tbody>
