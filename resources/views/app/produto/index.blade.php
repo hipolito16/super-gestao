@@ -22,6 +22,9 @@
                         <th>Descrição</th>
                         <th>Peso</th>
                         <th>Unidade de Medida</th>
+                        <th>Comprimento</th>
+                        <th>Altura</th>
+                        <th>Largura</th>
                         <th colspan="3">Ações</th>
                     </tr>
                     </thead>
@@ -32,6 +35,9 @@
                             <td>{{ $produto->descricao }}</td>
                             <td>{{ $produto->peso }}</td>
                             <td>{{ \App\Http\Controllers\ProdutoController::searchDescricaoByIdInUnidade($produto->unidade_id) }}</td>
+                            <td>{{ $produto->comprimento ?? '' }}</td>
+                            <td>{{ $produto->altura ?? '' }}</td>
+                            <td>{{ $produto->largura ?? '' }}</td>
                             <td align="right">
                                 <a class="icofont-exclamation-circle text-decoration-none"
                                    href="{{ route('produto.show', ['produto' => $produto->id]) }}"></a>
