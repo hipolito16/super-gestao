@@ -27,8 +27,31 @@
                             <td>{{ $fornecedor->site }}</td>
                             <td>{{ $fornecedor->uf }}</td>
                             <td>{{ $fornecedor->email }}</td>
-                            <td align="right"><a class="icofont-ui-edit text-decoration-none" href="{{ route('app.fornecedor.editar' , $fornecedor->id) }}"></a></td>
-                            <td align="left"><a class="icofont-ui-delete text-decoration-none" href="{{ route('app.fornecedor.excluir', $fornecedor->id) }}"></a></td>
+                            <td align="right"><a class="icofont-ui-edit text-decoration-none"
+                                                 href="{{ route('app.fornecedor.editar' , $fornecedor->id) }}"></a></td>
+                            <td align="left"><a class="icofont-ui-delete text-decoration-none"
+                                                href="{{ route('app.fornecedor.excluir', $fornecedor->id) }}"></a></td>
+                        </tr>
+                        <tr>
+                            <td colspan="6">
+                                <p>Lista de Produtos</p>
+                                <table class="table table-striped border mt-5 w-100">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nome</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($fornecedor->produto as $key => $produto)
+                                        <tr>
+                                            <td>{{ $produto->id ?? '' }}</td>
+                                            <td>{{ $produto->nome ?? '' }}</td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>

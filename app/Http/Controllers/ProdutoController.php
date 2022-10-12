@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Fornecedor;
 use App\Models\Produto;
 use App\Models\ProdutoDetalhe;
 use App\Models\Unidade;
@@ -39,7 +40,8 @@ class ProdutoController extends Controller
     public function create()
     {
         $unidades = Unidade::all();
-        return view('app.produto.form', ['unidades' => $unidades]);
+        $fornecedores = Fornecedor::all();
+        return view('app.produto.form', ['unidades' => $unidades, 'fornecedores' => $fornecedores]);
     }
 
     /**
@@ -82,7 +84,8 @@ class ProdutoController extends Controller
     public function edit(Request $request, Produto $produto)
     {
         $unidades = Unidade::all();
-        return view('app.produto.form', ['produto' => $produto, 'unidades' => $unidades]);
+        $fornecedores = Fornecedor::all();
+        return view('app.produto.form', ['produto' => $produto, 'unidades' => $unidades, 'fornecedores' => $fornecedores]);
     }
 
     /**
@@ -102,7 +105,7 @@ class ProdutoController extends Controller
         } else {
             $msg = null;
         }
-        return redirect()->route('produto.edit', ['produto' => $produto->id, 'msg' => $msg]);
+        return redirect()->route('produto.edit', ['produto' => $produto, 'msg' => $msg]);
     }
 
     /**
@@ -128,7 +131,8 @@ class ProdutoController extends Controller
             'nome' => 'required|min:3|max:40',
             'descricao' => 'required|min:3|max:2000',
             'peso' => 'required|integer',
-            'unidade_id' => 'required|integer|exists:unidades,id'
+            'unidade_id' => 'required|integer|exists:unidades,id',
+            'fornecedor_id' => 'exists:fornecedores,id'
         ];
 
         $feedback = [
@@ -140,7 +144,8 @@ class ProdutoController extends Controller
             'descricao.max' => 'O campo descrição pode ter no máximo 2000 caracteres',
             'peso.integer' => 'O campo peso precisa ser um número inteiro',
             'unidade_id.integer' => 'O campo unidade precisa ser um número inteiro',
-            'unidade_id.exists' => 'A unidade informada não existe'
+            'unidade_id.exists' => 'A unidade informada não existe',
+            'fornecedor_id.exists' => 'O fornecedor informado não existe'
         ];
     }
 }

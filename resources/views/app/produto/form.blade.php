@@ -14,12 +14,12 @@
         <div class="menu">
             <ul>
                 <li><a href="{{ route('produto.index') }}">Voltar</a></li>
-                <li><a href="">Consulta</a></li>
+                <li><a href="{{ route('produto.index') }}">Consulta</a></li>
             </ul>
         </div>
         <div class="informacao-pagina">
-            <div style="width: 30%; margin-left: auto; margin-right: auto">
-                @component('app.produto._components.form_create_edit', ['unidades' => $unidades, 'produto' => $produto ?? null, 'msg' => $_GET['msg'] ?? null])
+            <div style="width: 40%; margin-left: auto; margin-right: auto">
+                @component('app.produto._components.form_create_edit', ['unidades' => $unidades, 'produto' => $produto ?? null, 'msg' => $_GET['msg'] ?? null, 'fornecedores' => $fornecedores])
                 @endcomponent
             </div>
         </div>
