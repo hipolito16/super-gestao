@@ -35,9 +35,9 @@
                             <td>{{ $produto->descricao }}</td>
                             <td>{{ $produto->peso }}</td>
                             <td>{{ \App\Http\Controllers\ProdutoController::searchDescricaoByIdInUnidade($produto->unidade_id) }}</td>
-                            <td>{{ $produto->proutoDetalhe->comprimento ?? '' }}</td>
-                            <td>{{ $produto->proutoDetalhe->altura ?? '' }}</td>
-                            <td>{{ $produto->proutoDetalhe->largura ?? '' }}</td>
+                            <td>{{ $produto->produtoDetalhe->comprimento ?? '' }}</td>
+                            <td>{{ $produto->produtoDetalhe->altura ?? '' }}</td>
+                            <td>{{ $produto->produtoDetalhe->largura ?? '' }}</td>
                             <td align="right">
                                 <a class="icofont-exclamation-circle text-decoration-none"
                                    href="{{ route('produto.show', ['produto' => $produto->id]) }}"></a>

@@ -10,6 +10,6 @@ class Produto extends Model
     protected $fillable = ['nome', 'descricao', 'peso', 'unidade_id'];
 
     public function produtoDetalhe() {
-        return $this->hasOne('App\Models\ProdutoDetahe');
+        return $this->hasOne(ProdutoDetalhe::class, 'produto_id', 'id');
     }
 }
