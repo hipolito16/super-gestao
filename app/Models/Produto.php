@@ -13,7 +13,7 @@ class Produto extends Model
         return $this->hasOne(ProdutoDetalhe::class, 'produto_id', 'id');
     }
 
-    public function fornecedor() {
-        return $this->belongsTo(Fornecedor::class, 'fornecedor_id', 'id');
+    public function unidade() {
+        return $this->belongsTo(Unidade::class, 'unidade_id', 'id');
     }
 }

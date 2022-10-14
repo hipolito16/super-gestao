@@ -121,6 +121,7 @@ class ProdutoController extends Controller
         return redirect()->route('produto.index', ['msg' => $msg]);
     }
 
+    // Função qe fiz para buscar a descrição de uma tabela relacionada sem usar o Eloquent
     public static function searchDescricaoByIdInUnidade($id)
     {
         return Unidade::firstWhere('id', $id)->descricao;

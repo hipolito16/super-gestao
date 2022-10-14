@@ -14,7 +14,6 @@ Route::post('/login', [\App\Http\Controllers\LoginController::class, 'autenticar
 Route::middleware('autenticacao')->prefix('/app')->group(function() {
     Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('app.home');
     Route::get('/sair', [\App\Http\Controllers\LoginController::class, 'sair'])->name('app.sair');
-    Route::get('/cliente', [\App\Http\Controllers\ClienteController::class, 'index'])->name('app.cliente');
     Route::get('/fornecedor', [\App\Http\Controllers\FornecedorController::class, 'index'])->name('app.fornecedor');
     Route::post('/fornecedor/listar', [\App\Http\Controllers\FornecedorController::class, 'listar'])->name('app.fornecedor.listar');
     Route::get('/fornecedor/listar', [\App\Http\Controllers\FornecedorController::class, 'listar'])->name('app.fornecedor.listar');
@@ -28,6 +27,10 @@ Route::middleware('autenticacao')->prefix('/app')->group(function() {
 
     // produtos detalhes
     Route::resource('produto-detalhe', 'App\Http\Controllers\ProdutoDetalheController');
+
+    Route::resource('cliente', 'App\Http\Controllers\ClienteController');
+    Route::resource('pedido', 'App\Http\Controllers\PedidoController');
+    Route::resource('pedido-produto', 'App\Http\Controllers\PedidoProdutoController');
 });
 
 Route::fallback(function() {

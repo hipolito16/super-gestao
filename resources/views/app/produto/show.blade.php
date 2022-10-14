@@ -36,11 +36,11 @@
                     </tr>
                     <tr>
                         <td>Peso</td>
-                        <td>{{ $produto->peso }} KG</td>
+                        <td>{{ $produto->peso }}</td>
                     </tr>
                     <tr>
                         <td>Unidade de Medida</td>
-                        <td>{{ $produto->unidade_id }} {{ \App\Http\Controllers\ProdutoController::searchDescricaoByIdInUnidade($produto->unidade_id) }}</td>
+                        <td>{{ $produto->unidade->descricao }}</td>
                     </tr>
                     </tbody>
                 </table>

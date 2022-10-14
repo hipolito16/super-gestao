@@ -36,7 +36,7 @@
                             <td>{{ $produto->descricao }}</td>
                             <td>{{ $produto->fornecedor->nome ?? '' }}</td>
                             <td>{{ $produto->peso }}</td>
-                            <td>{{ \App\Http\Controllers\ProdutoController::searchDescricaoByIdInUnidade($produto->unidade_id) }}</td>
+                            <td>{{ $produto->unidade->descricao }}</td>
                             <td>{{ $produto->produtoDetalhe->comprimento ?? '' }}</td>
                             <td>{{ $produto->produtoDetalhe->altura ?? '' }}</td>
                             <td>{{ $produto->produtoDetalhe->largura ?? '' }}</td>
