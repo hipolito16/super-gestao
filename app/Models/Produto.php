@@ -9,14 +9,17 @@ class Produto extends Model
 {
     protected $fillable = ['nome', 'descricao', 'peso', 'unidade_id', 'fornecedor_id'];
 
-    public function produtoDetalhe() {
+    public function produtoDetalhe()
+    {
         return $this->hasOne(ProdutoDetalhe::class, 'produto_id', 'id');
-<<<<<<<<< Temporary merge branch 1
-=========
     }
 
-    public function fornecedor() {
+    public function fornecedor()
+    {
         return $this->belongsTo(Fornecedor::class, 'fornecedor_id', 'id');
->>>>>>>>> Temporary merge branch 2
+    }
+
+    public function unidade() {
+        return $this->belongsTo(Unidade::class, 'unidade_id', 'id');
     }
 }
