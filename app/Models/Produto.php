@@ -11,9 +11,12 @@ class Produto extends Model
 
     public function produtoDetalhe() {
         return $this->hasOne(ProdutoDetalhe::class, 'produto_id', 'id');
+<<<<<<<<< Temporary merge branch 1
+=========
     }
 
-    public function unidade() {
-        return $this->belongsTo(Unidade::class, 'unidade_id', 'id');
+    public function fornecedor() {
+        return $this->belongsTo(Fornecedor::class, 'fornecedor_id', 'id');
+>>>>>>>>> Temporary merge branch 2
     }
 }
