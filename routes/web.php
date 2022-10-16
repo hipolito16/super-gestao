@@ -6,6 +6,11 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PrincipalController;
 use App\Http\Controllers\SobreNosController;
+use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\ProdutoController;
+use App\Http\Controllers\ProdutoDetalheController;
+use App\Http\Controllers\PedidoController;
+use App\Http\Controllers\PedidoProdutoController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PrincipalController::class, 'principal'])->name('site.index');
@@ -28,14 +33,14 @@ Route::middleware('autenticacao')->prefix('/app')->group(function () {
     Route::post('/fornecedor/adicionar', [FornecedorController::class, 'adicionar'])->name('app.fornecedor.adicionar');
 
     // produtos
-    Route::resource('produto', 'App\Http\Controllers\ProdutoController');
+    Route::resource('produto', ProdutoController::class);
 
     // produtos detalhes
-    Route::resource('produto-detalhe', 'App\Http\Controllers\ProdutoDetalheController');
+    Route::resource('produto-detalhe', ProdutoDetalheController::class);
 
-    Route::resource('cliente', 'App\Http\Controllers\ClienteController');
-    Route::resource('pedido', 'App\Http\Controllers\PedidoController');
-    Route::resource('pedido-produto', 'App\Http\Controllers\PedidoProdutoController');
+    Route::resource('cliente', ClienteController::class);
+    Route::resource('pedido', PedidoController::class);
+    Route::resource('pedido-produto', PedidoProdutoController::class);
 });
 
 Route::fallback(function () {
