@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pedido;
 use Illuminate\Http\Request;
 
 class PedidoProdutoController extends Controller
@@ -21,9 +22,9 @@ class PedidoProdutoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Pedido $pedido)
     {
-        //
+        return view('app.pedido_produto.form', ['pedido' => $pedido]);
     }
 
     /**

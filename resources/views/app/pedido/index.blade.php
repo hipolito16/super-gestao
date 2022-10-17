@@ -28,8 +28,8 @@
                     @foreach($pedidos as $pedido)
                         <tr>
                             <td>{{ $pedido->id }}</td>
-                            <td>{{ $pedido->cliente_id }}</td>
                             <td>{{ $pedido->cliente->nome }}</td>
+                            <td><a class="text-decoration-none" href="{{ route('pedido-produto.create', ['pedido' => $pedido->id]) }}">Adicionar Produtos</a></td>
                             <td align="right">
                                 <a class="icofont-exclamation-circle text-decoration-none"
                                    href="{{ route('pedido.show', ['pedido' => $pedido->id]) }}"></a>
