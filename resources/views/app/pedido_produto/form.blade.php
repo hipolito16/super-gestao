@@ -21,6 +21,7 @@
                         <th>ID</th>
                         <th>Nome do Produto</th>
                         <th>Quantiade</th>
+                        <th>Ações</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -29,6 +30,13 @@
                             <td>{{ $produto->id }}</td>
                             <td>{{ $produto->nome }}</td>
                             <td>{{ $produto->pivot->quantidade }}</td>
+                            <td>
+                                <form id="form_{{ $produto->pivot->id }}" method="post" action="{{ route('pedido-produto.destroy', ['pedidoProduto' => $produto->pivot->id, 'pedido_id' => $pedido->id]) }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <a href="#" onclick="document.getElementById('form_{{ $produto->pivot->id }}').submit()" class="icofont-ui-delete text-decoration-none"></a>
+                                </form>
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>

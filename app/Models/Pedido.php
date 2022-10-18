@@ -17,6 +17,6 @@ class Pedido extends Model
 
     public function produto()
     {
-        return $this->belongsToMany(Produto::class, 'pedidos_produtos', 'pedido_id', 'produto_id')->withPivot('created_at', 'updated_at', 'quantidade');
+        return $this->belongsToMany(Produto::class, 'pedidos_produtos', 'pedido_id', 'produto_id')->withPivot('id', 'created_at', 'updated_at', 'quantidade');
     }
 }

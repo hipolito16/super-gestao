@@ -34,7 +34,7 @@ class PedidoProdutoController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, Pedido $pedido)
@@ -63,7 +63,7 @@ class PedidoProdutoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -74,7 +74,7 @@ class PedidoProdutoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -85,8 +85,8 @@ class PedidoProdutoController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -97,12 +97,18 @@ class PedidoProdutoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(PedidoProduto $pedidoProduto, Pedido $pedido_id)
     {
-        //
+        $pedidoProduto->delete();
+        if (!isset($errors)) {
+            $msg = "Produto excluído do pedido com sucesso!";
+        } else {
+            $msg = null;
+        }
+        return redirect()->route('pedido-produto.create', ['pedido' => $pedido_id->id, 'msg' => $msg]);
     }
 
     public static function regrasAndFeedback(&$regras, &$feedback)
