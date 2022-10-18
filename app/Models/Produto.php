@@ -22,4 +22,9 @@ class Produto extends Model
     public function unidade() {
         return $this->belongsTo(Unidade::class, 'unidade_id', 'id');
     }
+
+    public function pedido()
+    {
+        return $this->belongsToMany(Pedido::class, 'pedidos_produtos', 'produto_id', 'pedido_id');
+    }
 }

@@ -14,10 +14,27 @@
         </div>
         <div class="informacao-pagina">
             <div style="width: 40%; margin-left: auto; margin-right: auto">
-                <h4>Detalhes do Pedido</h4>
-                <p>ID do Pedido: {{ $pedido->id }}</p>
-                <p>Cliente: {{ $pedido->cliente_id }}</p>
-                <p>RETOMAR 9:00</p>
+                <h4>Itens do Pedido</h4>
+                <table class="table table-striped border mt-5 w-100">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome do Produto</th>
+                        <th>Quantiade</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($pedido->produto as $produto)
+                        <tr>
+                            <td>{{ $produto->id }}</td>
+                            <td>{{ $produto->nome }}</td>
+                            <td>{{ $produto->pivot->quantidade }}</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+                @component('app.pedido_produto._components.form_create_edit', ['pedido' => $pedido ?? null, 'produtos' => $produtos, 'msg' => $_GET['msg'] ?? null])
+                @endcomponent
             </div>
         </div>
     </div>

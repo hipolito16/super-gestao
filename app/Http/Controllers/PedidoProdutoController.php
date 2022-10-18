@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pedido;
+use App\Models\PedidoProduto;
+use App\Models\Produto;
 use Illuminate\Http\Request;
 
 class PedidoProdutoController extends Controller
@@ -24,7 +26,9 @@ class PedidoProdutoController extends Controller
      */
     public function create(Pedido $pedido)
     {
-        return view('app.pedido_produto.form', ['pedido' => $pedido]);
+        $produtos = Produto::all();
+        $pedido->produto;
+        return view('app.pedido_produto.form', ['pedido' => $pedido, 'produtos' => $produtos]);
     }
 
     /**
@@ -33,9 +37,27 @@ class PedidoProdutoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Pedido $pedido)
     {
-        //
+        self::regrasAndFeedback($regras, $feedback);
+        $request->validate($regras, $feedback);
+
+
+//        $pedidoProduto = new PedidoProduto();
+//        $pedidoProduto->pedido_id = $pedido->id;
+//        $pedidoProduto->produto_id = $request->get('produto_id');
+//        $pedidoProduto->quantidade = $request->get('quantidade');
+//        $pedidoProduto->save();
+
+        $pedido->produto()->attach($request->get('produto_id'), ['quantidade' => $request->get('quantidade')]);
+
+        if (!isset($errors)) {
+            $msg = "Produto adicionado ao pedido com sucesso!";
+        } else {
+            $msg = null;
+        }
+
+        return redirect()->route('pedido-produto.create', ['pedido' => $pedido->id, 'msg' => $msg]);
     }
 
     /**
@@ -81,5 +103,20 @@ class PedidoProdutoController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public static function regrasAndFeedback(&$regras, &$feedback)
+    {
+        $regras = [
+            'produto_id' => 'exists:produtos,id',
+            'quantidade' => 'required|numeric|min:1',
+        ];
+
+        $feedback = [
+            'produto_id.exists' => 'O produto informado não existe',
+            'quantidade.required' => 'A quantidade é obrigatória',
+            'quantidade.numeric' => 'A quantidade deve ser numérica',
+            'quantidade.min' => 'A quantidade deve ser maior que zero'
+        ];
     }
 }
